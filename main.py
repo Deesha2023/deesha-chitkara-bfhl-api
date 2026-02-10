@@ -6,20 +6,23 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {"status": "API is running"}
+
 @app.get("/health")
 def health():
     return {
         "is_success": True,
-        "official_email": "deesha0067.be23@chitkara.edu.in"
+        "email": "deesha0067.be23@chitkara.edu.in"
     }
 
 @app.post("/bfhl")
-def bfhl(data: dict):
+def bfhl(payload: dict):
     return {
         "is_success": True,
-        "data": data
+        "data": payload
     }
-
 
 OFFICIAL_EMAIL = "deesha0067.be23@chitkara.edu.in"
 
@@ -101,4 +104,5 @@ def bfhl(data: RequestData):
 
     except:
         raise HTTPException(status_code=400, detail="Error while processing")
+
 
